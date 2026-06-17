@@ -1,0 +1,25 @@
+# Ruflo / Claude-Flow runtime data (not config)
+# Databases (SQLite + WAL/SHM sidecars)
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+ruvector.db
+.swarm/
+
+# Runtime data, logs, sessions, metrics
+.claude-flow/data/
+.claude-flow/logs/
+.claude-flow/sessions/
+.claude-flow/metrics/
+.claude-flow/learning/
+
+# Neural / ML model artifacts (downloaded at runtime)
+.claude-flow/neural/
+*.onnx
+
+# Node
+node_modules/
+npm-debug.log*
+.DS_Store
