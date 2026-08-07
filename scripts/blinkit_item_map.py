@@ -16,19 +16,25 @@ catalogues share no common key (no barcode/EAN in the Blinkit export):
      (exact / strong / likely / weak / none) so the weak tail can be reviewed
      by hand instead of silently trusted.
 
-Input formats auto-detected for --ours:
+--ours accepts either a DIRECTORY of 2065 sales files (default: the rolling
+tree) or a single item master / stock export:
+
+  directory / glob    -> every 2065 sales file under it; items are deduped by
+                         Item Code and their Net Sales are summed, so the
+                         mapping is ranked by what actually sells
   13081 item master   (Item code, Item Name, Mfr Name, Major Category, ...)
   3434 stock export   (Itemcode, Item Name, BRAND, DEPARTMENT, ...)
   1248 stock snapshot (Item Code, Item Name, ...)
   anything else       -> pass --code-col / --name-col / --brand-col
 GOFRUGAL preamble lines above the header row are skipped automatically.
 
-Run:
+Run (default = all regions' monthly sales files in the rolling tree):
   python3 scripts/blinkit_item_map.py \
-      --ours  ~/Documents/"stock analysis"/rolling/stock/latest_13081.csv \
       --blinkit data/blinkit_full_catalog.csv \
-      --out   data/blinkit_item_map.csv
+      --out     data/blinkit_item_map.csv
 
+  --ours ~/Documents/"stock analysis"/rolling/raw/RJ   # one region only
+  --ours ~/Documents/"stock analysis"/rolling/stock/latest_13081.csv
   --direction blinkit   # one row per BLINKIT item -> best OUR item instead
   --min-score 70        # drop matches below this (default: keep all, tiered)
   --top-k 3             # also write _candidates.csv with the runner-ups
@@ -36,7 +42,6 @@ Run:
 
 import argparse
 import csv
-import io
 import math
 import re
 import sys
@@ -44,6 +49,12 @@ from collections import defaultdict
 from pathlib import Path
 
 from rapidfuzz import fuzz
+
+sys.path.insert(0, str(Path(__file__).parent))
+from item_sources import load_blinkit, load_ours  # noqa: E402
+
+# same rolling tree daily_update.py writes its region-split 2065 files into
+ROLLING_RAW = Path.home() / "Documents" / "stock analysis" / "rolling" / "raw"
 
 # ---------------------------------------------------------------------------
 # NORMALISATION
@@ -125,85 +136,6 @@ def tokens(name: str) -> list[str]:
         if len(w) == 1 and not w.isdigit():
             continue
         out.append(w)
-    return out
-
-
-# ---------------------------------------------------------------------------
-# INPUT
-# ---------------------------------------------------------------------------
-
-def read_csv_skip_preamble(path: Path, header_hints: list[str]) -> list[dict]:
-    """Read a CSV whose real header row may sit below a GOFRUGAL preamble."""
-    txt = path.read_text(encoding="utf-8", errors="replace")
-    pos = -1
-    for hint in header_hints:
-        pos = txt.lower().find(hint.lower())
-        if pos >= 0:
-            break
-    if pos > 0:
-        txt = txt[pos:]
-    rows = list(csv.DictReader(io.StringIO(txt)))
-    return [r for r in rows if any((v or "").strip() for v in r.values())]
-
-
-def pick_col(cols: list[str], *candidates: str) -> str | None:
-    low = {c.strip().lower(): c for c in cols if c}
-    for cand in candidates:
-        if cand.lower() in low:
-            return low[cand.lower()]
-    return None
-
-
-def load_ours(path: Path, code_col=None, name_col=None, brand_col=None) -> list[dict]:
-    rows = read_csv_skip_preamble(path, ["Item code,", "Item Code,", "Itemcode,",
-                                         "Outlet&Itemcode,", "Outlet Name,"])
-    if not rows:
-        sys.exit(f"[ours] no data rows in {path}")
-    cols = list(rows[0].keys())
-    code_col = code_col or pick_col(cols, "Item code", "Item Code", "Itemcode", "code")
-    name_col = name_col or pick_col(cols, "Item Name", "ItemName", "name",
-                                    "Item Description")
-    brand_col = brand_col or pick_col(cols, "BRAND", "Brand", "Mfr Name",
-                                      "Manufacturer")
-    if not code_col or not name_col:
-        sys.exit(f"[ours] could not find code/name columns in {cols}\n"
-                 f"       pass --code-col / --name-col explicitly")
-    dept_col = pick_col(cols, "DEPARTMENT", "Major Category", "Department")
-
-    seen, out = set(), []
-    for r in rows:
-        code = (r.get(code_col) or "").strip()
-        name = (r.get(name_col) or "").strip()
-        if not code or not name or code in seen:
-            continue
-        seen.add(code)
-        out.append({
-            "code": code,
-            "name": name,
-            "brand": (r.get(brand_col) or "").strip() if brand_col else "",
-            "dept": (r.get(dept_col) or "").strip() if dept_col else "",
-        })
-    print(f"[ours] {len(out):,} unique items from {path.name} "
-          f"(code={code_col!r} name={name_col!r} brand={brand_col!r})")
-    return out
-
-
-def load_blinkit(path: Path) -> list[dict]:
-    rows = list(csv.DictReader(path.open(encoding="utf-8", errors="replace")))
-    out = []
-    for r in rows:
-        name = (r.get("name") or "").strip()
-        if not name:
-            continue
-        out.append({
-            "item_id": (r.get("item_id") or "").strip(),
-            "name": name,
-            "variant": (r.get("variant") or "").strip(),
-            "price": (r.get("price") or "").strip(),
-            "mrp": (r.get("mrp") or "").strip(),
-            "category_path": (r.get("category_path") or "").strip(),
-        })
-    print(f"[blinkit] {len(out):,} catalog items from {path.name}")
     return out
 
 
@@ -349,7 +281,8 @@ def prep(records: list[dict], size_fields) -> None:
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--ours", required=True, type=Path)
+    ap.add_argument("--ours", type=Path, default=ROLLING_RAW,
+                    help=f"2065 sales dir, glob, or master file (default: {ROLLING_RAW})")
     ap.add_argument("--blinkit", required=True, type=Path)
     ap.add_argument("--out", required=True, type=Path)
     ap.add_argument("--direction", choices=("ours", "blinkit"), default="ours",
@@ -425,8 +358,25 @@ def main():
         print(f"  {label:8s} {c:7,d}  {c/total:6.1%}")
     print("  review anything below 'strong' before using it for pricing.")
 
+    # When the source was the sales tree, item COUNT understates coverage —
+    # what matters is how much of the money has a Blinkit price to compare to.
+    amt_all = sum(_f(r["our_sales_amt"]) for r in rows)
+    if amt_all > 0:
+        good = sum(_f(r["our_sales_amt"]) for r in rows
+                   if r["tier"] in ("exact", "strong"))
+        print(f"\n[coverage] Rs {good:,.0f} of Rs {amt_all:,.0f} net sales "
+              f"({good/amt_all:.1%}) matched at exact/strong confidence")
+
+
+def _f(v) -> float:
+    try:
+        return float(v or 0)
+    except (TypeError, ValueError):
+        return 0.0
+
 
 FIELDS = ["our_code", "our_name", "our_brand", "our_dept",
+          "our_sales_qty", "our_sales_amt",
           "blinkit_item_id", "blinkit_name", "blinkit_variant",
           "blinkit_price", "blinkit_mrp", "blinkit_category",
           "score", "tier", "near_ties", "size_note"]
@@ -438,6 +388,8 @@ def _row(o, b, score, note, t, ties=0) -> dict:
     return {
         "our_code": o.get("code", ""), "our_name": o.get("name", ""),
         "our_brand": o.get("brand", ""), "our_dept": o.get("dept", ""),
+        "our_sales_qty": o.get("sales_qty", ""),
+        "our_sales_amt": o.get("sales_amt", ""),
         "blinkit_item_id": b.get("item_id", ""), "blinkit_name": b.get("name", ""),
         "blinkit_variant": b.get("variant", ""), "blinkit_price": b.get("price", ""),
         "blinkit_mrp": b.get("mrp", ""), "blinkit_category": b.get("category_path", ""),

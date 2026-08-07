@@ -9,6 +9,7 @@ not eyeballing.
 """
 
 import csv
+import io
 import random
 import subprocess
 import sys
@@ -97,6 +98,71 @@ def build_fixture(tmp: Path) -> dict[str, str]:
     return truth, path
 
 
+def build_sales_tree(tmp: Path) -> tuple[dict, Path]:
+    """Fake the rolling 2065 tree: 2 regions x 2 months of monthly sales files,
+    with the GOFRUGAL preamble, per-outlet duplicate rows, and the same item
+    codes recurring across regions/months — exactly what the deduper must survive.
+    Also drops decoy daily/ + all_stores/ copies that must NOT be double-counted."""
+    rng = random.Random(SEED)
+    truth, ours = build_fixture(tmp)
+    master = list(csv.DictReader((tmp / "ours_fixture.csv").open(encoding="utf-8")))
+    root = tmp / "rolling" / "raw"
+
+    hdr = ["Outlet Name", "Item Code", "Item Name", "DEPARTMENT", "BRAND",
+           "Net Sales Qty", "Net Sales Amt"]
+    preamble = ('Shubham K mart\n"Sales - Item Wise Detailed \n'
+                ' DATE : from 01-06-2026 30-06-2026 ;  "\n')
+
+    def write(path: Path, items, outlets):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        buf = io.StringIO()
+        w = csv.DictWriter(buf, fieldnames=hdr)
+        w.writeheader()
+        for it in items:
+            for outlet in outlets:
+                w.writerow({
+                    "Outlet Name": outlet,
+                    "Item Code": it["Item code"],
+                    "Item Name": it["Item Name"],
+                    "DEPARTMENT": it["Major Category"],
+                    "BRAND": it["Mfr Name"],
+                    "Net Sales Qty": rng.randint(1, 40),
+                    "Net Sales Amt": rng.randint(50, 5000),
+                })
+        path.write_text(preamble + buf.getvalue(), encoding="utf-8")
+
+    half = len(master) // 2
+    for ym in ("2026-06", "2026-07"):
+        write(root / "RJ" / "monthly" / f"sales_{ym}_2065.csv",
+              master[:half + 40], ["RJ SHOP 1", "RJ SHOP 2"])
+        write(root / "GJ" / "monthly" / f"sales_{ym}_2065.csv",
+              master[half:], ["GJ SHOP 1"])
+    # decoys: monthly must win, so these contribute nothing
+    write(root / "RJ" / "daily" / "2026-07-01_2065.csv", master[:5], ["RJ SHOP 1"])
+    write(root / "all_stores" / "2026-07-01_2065_all.csv", master[:5], ["RJ SHOP 1"])
+    return truth, root
+
+
+def test_sales_tree_source(tmp: Path):
+    from item_sources import find_sales_files, load_ours
+
+    truth, root = build_sales_tree(tmp)
+    files = find_sales_files(root)
+    assert len(files) == 4, f"monthly files must win over daily/all_stores: {files}"
+    assert all("monthly" in str(f) for f in files)
+
+    items = load_ours(root)
+    assert len(items) == len(truth), f"{len(items)} items != {len(truth)} expected"
+    assert all(i["brand"] and i["dept"] for i in items), "brand/dept lost"
+    assert all(i["sales_amt"] > 0 for i in items), "sales not summed"
+    # sorted by value, descending — reviewers start where the money is
+    amts = [i["sales_amt"] for i in items]
+    assert amts == sorted(amts, reverse=True)
+    print(f"  sales-tree source OK ({len(items)} items, "
+          f"Rs {sum(amts):,.0f} across {len(files)} files)")
+    return root
+
+
 def test_accuracy(tmp: Path):
     truth, ours = build_fixture(tmp)
     out = tmp / "map.csv"
@@ -144,6 +210,24 @@ def test_accuracy(tmp: Path):
     assert prec >= 0.95, "exact+strong precision regressed below 95%"
 
 
+def test_end_to_end_from_sales(tmp: Path, root: Path):
+    """The full CLI, sourced from the sales tree instead of a master file."""
+    out = tmp / "map_from_sales.csv"
+    r = subprocess.run(
+        [sys.executable, str(SCRIPT), "--ours", str(root),
+         "--blinkit", str(CATALOG), "--out", str(out)],
+        capture_output=True, text=True,
+    )
+    assert r.returncode == 0, r.stderr[-2000:]
+    assert "[coverage]" in r.stdout, "sales-value coverage line missing"
+    print(r.stdout[r.stdout.index("[summary]"):])
+
+    rows = list(csv.DictReader(out.open(encoding="utf-8")))
+    assert len(rows) == N_SAMPLE
+    assert all(float(x["our_sales_amt"]) > 0 for x in rows), "sales cols empty"
+    print(f"  end-to-end from sales tree OK ({len(rows)} rows)")
+
+
 if __name__ == "__main__":
     tmp = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("/tmp/blinkit_test")
     tmp.mkdir(parents=True, exist_ok=True)
@@ -153,5 +237,7 @@ if __name__ == "__main__":
     if not CATALOG.exists():
         print(f"\nSKIP accuracy test — put the Blinkit catalog at {CATALOG}")
         sys.exit(0)
+    root = test_sales_tree_source(tmp)
     test_accuracy(tmp)
+    test_end_to_end_from_sales(tmp, root)
     print("\nALL TESTS PASSED")
