@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300" role="img" aria-label="ASK SALE WALA mark — Bazaar Arch">
+  <title>ASK SALE WALA — Bazaar Arch</title>
+  <g>
+    <path d="M62 256 V142 a88 88 0 0 1 176 0 V256" fill="none" stroke="#1B3A6B"
+      stroke-width="24" stroke-linecap="round"/>
+    <path d="M104 168 H196 q-4 44 -46 46 q-42 -2 -46 -46 Z" fill="#C08A2E"/>
+    <rect x="132" y="132" width="36" height="14" rx="7" fill="#C08A2E"/>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 260" width="1000" height="260" role="img" aria-label="ASK SALE WALA logo — Wala Seal">
+  <title>ASK SALE WALA — Wala Seal lockup</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=Tiro+Devanagari+Hindi&display=swap');</style>
+  <g transform="translate(24,40) scale(0.6)">
+    <circle cx="150" cy="150" r="132" fill="none" stroke="#1B3A6B" stroke-width="14"/>
+    <circle cx="150" cy="150" r="112" fill="none" stroke="#C08A2E" stroke-width="4"/>
+    <circle cx="150" cy="150" r="88"  fill="none" stroke="#1B3A6B" stroke-width="12"/>
+    <circle cx="150" cy="150" r="58"  fill="none" stroke="#1B3A6B" stroke-width="12"/>
+    <circle cx="150" cy="150" r="26"  fill="#C08A2E"/>
+  </g>
+  <g transform="translate(232,0)">
+  <text x="0" y="150" font-family="'Archivo Black', Archivo, Helvetica, Arial, sans-serif" font-size="72" letter-spacing="-1" fill="#1B3A6B">ASK SALE <tspan fill="#C08A2E">WALA</tspan></text>
+  <text x="0" y="192" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="19" font-weight="600" letter-spacing="4.2" fill="#141A23" fill-opacity="0.72">CROCKERY &#183; HANDLOOM &#183; HOME ESSENTIALS</text>
+  </g>
+</svg>

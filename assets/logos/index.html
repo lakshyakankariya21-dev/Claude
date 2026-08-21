@@ -1,0 +1,399 @@
+<title>Ask Sale Wala Identity</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@500&family=Tiro+Devanagari+Hindi&display=swap">
+<style>
+:root {
+  --ground:#EEF1F5; --surface:#FFFFFF; --edge:#D2DAE4;
+  --ink:#141A23; --muted:#5C6878;
+  --indigo:#1B3A6B; --brass:#B07F26; --dark:#12253F;
+  --shadow:0 1px 2px rgba(20,26,35,.05), 0 12px 32px -18px rgba(20,26,35,.28);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:#0D131C; --surface:#151E2B; --edge:#26323F;
+    --ink:#E8EDF3; --muted:#94A2B3;
+    --indigo:#8FB2E4; --brass:#DCA93F; --dark:#0A1526;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"] {
+  --ground:#0D131C; --surface:#151E2B; --edge:#26323F;
+  --ink:#E8EDF3; --muted:#94A2B3;
+  --indigo:#8FB2E4; --brass:#DCA93F; --dark:#0A1526;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px -18px rgba(0,0,0,.8);
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Serif 4",Georgia,serif; font-size:17px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap { max-width:1220px; margin:0 auto; padding:0 28px 96px; }
+header { padding:72px 0 44px; border-bottom:1px solid var(--edge); }
+.eyebrow {
+  font-family:Archivo,system-ui,sans-serif; font-size:12px; font-weight:700;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--brass); margin:0 0 18px;
+}
+h1 {
+  font-family:"Archivo Black",Archivo,sans-serif; font-weight:400;
+  font-size:clamp(2.2rem,5.4vw,3.9rem); line-height:1.02; letter-spacing:-.03em;
+  margin:0 0 20px; text-wrap:balance; max-width:16ch;
+}
+h1 em { font-style:normal; color:var(--indigo); }
+.lede { margin:0; max-width:62ch; font-size:1.15rem; color:var(--muted); }
+.layout { display:grid; grid-template-columns:180px 1fr; gap:56px; padding-top:48px; align-items:start; }
+nav { position:sticky; top:32px; display:flex; flex-direction:column; gap:2px;
+  font-family:Archivo,system-ui,sans-serif; font-size:13px; font-weight:600; }
+nav .navlbl { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+nav a { display:flex; gap:10px; color:var(--ink); text-decoration:none; padding:7px 10px;
+  border-radius:5px; border-left:2px solid transparent; }
+nav a span { font-family:"IBM Plex Mono",monospace; color:var(--brass); }
+nav a:hover, nav a:focus-visible { background:var(--surface); border-left-color:var(--brass); outline:none; }
+.stack { display:flex; flex-direction:column; gap:40px; }
+.concept { background:var(--surface); border:1px solid var(--edge); border-radius:4px;
+  box-shadow:var(--shadow); overflow:hidden; scroll-margin-top:24px; }
+.concept-head { display:flex; align-items:baseline; gap:14px; padding:22px 26px 18px; border-bottom:1px solid var(--edge); }
+.num { font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--brass); }
+.concept-head h2 { font-family:Archivo,system-ui,sans-serif; font-weight:700; font-size:1.28rem;
+  letter-spacing:-.01em; margin:0; }
+.panels { display:grid; grid-template-columns:1fr 260px; }
+.panel { display:flex; align-items:center; justify-content:center; padding:38px 34px; min-height:210px; }
+.panel-light { background:var(--surface); border-right:1px solid var(--edge); }
+.panel-dark { background:var(--dark); }
+.panel svg { max-width:100%; height:auto; }
+.panel-light svg { width:min(100%,430px); }
+.panel-dark svg { width:118px; }
+.notes { display:grid; grid-template-columns:1.35fr 1fr; gap:34px; padding:24px 26px 28px; border-top:1px solid var(--edge); }
+.notes p { margin:0; }
+.idea { font-size:1.03rem; }
+.use { color:var(--muted); font-size:.97rem; }
+.lbl { display:block; font-family:Archivo,system-ui,sans-serif; font-size:10.5px; font-weight:700;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--brass); margin-bottom:6px; }
+section.block { margin-top:56px; }
+h3 { font-family:Archivo,system-ui,sans-serif; font-size:1.05rem; font-weight:700; letter-spacing:-.01em;
+  margin:0 0 18px; padding-bottom:10px; border-bottom:1px solid var(--edge); }
+.swatches { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.sw { border:1px solid var(--edge); border-radius:4px; overflow:hidden; background:var(--surface); }
+.sw i { display:block; height:76px; }
+.sw div { padding:10px 12px; font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--muted); }
+.sw b { display:block; font-family:Archivo,sans-serif; font-size:12.5px; color:var(--ink); letter-spacing:.02em; margin-bottom:3px; }
+.two { display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+.bilingual { background:var(--surface); border:1px solid var(--edge); border-radius:4px; padding:30px; }
+.bilingual svg { width:100%; height:auto; }
+ul.rules { margin:0; padding-left:1.1em; color:var(--muted); }
+ul.rules li { margin-bottom:9px; }
+ul.rules b { color:var(--ink); font-weight:600; }
+footer { margin-top:64px; padding-top:22px; border-top:1px solid var(--edge); color:var(--muted);
+  font-family:Archivo,sans-serif; font-size:12.5px; letter-spacing:.04em; }
+@media (max-width:900px) {
+  .layout { grid-template-columns:1fr; gap:28px; }
+  nav { position:static; flex-direction:row; flex-wrap:wrap; }
+  nav .navlbl { width:100%; margin:0; }
+  .panels { grid-template-columns:1fr; }
+  .panel-light { border-right:none; border-bottom:1px solid var(--edge); }
+  .notes, .two { grid-template-columns:1fr; gap:20px; }
+}
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">Identity concepts &#183; Round one</p>
+  <h1>Ask Sale <em>Wala</em></h1>
+  <p class="lede">Five marks and a wordmark for a crockery, handloom and household essentials brand. The palette is vat indigo and brass &mdash; the dye of Indian handloom and the metal of the Indian kitchen &mdash; deliberately away from the terracotta-and-cream everyone else in home goods is already wearing. Every mark below is drawn as vector, works in one colour, and survives being shrunk to a 16px favicon.</p>
+</header>
+
+<div class="layout">
+  <nav>
+    <span class="navlbl">Concepts</span>
+    <a href="#c01"><span>01</span>The Stack</a>
+<a href="#c02"><span>02</span>Bazaar Arch</a>
+<a href="#c03"><span>03</span>Warp & Weft</a>
+<a href="#c04"><span>04</span>Wala Seal</a>
+<a href="#c05"><span>05</span>Thread to Plate</a>
+  </nav>
+  <div class="stack">
+    
+      <article class="concept" id="c01">
+        <div class="concept-head">
+          <span class="num">01</span>
+          <h2>The Stack</h2>
+        </div>
+        <div class="panels">
+          <div class="panel panel-light"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 260" width="1000" height="260" role="img" aria-label="ASK SALE WALA logo — The Stack">
+  <title>ASK SALE WALA — The Stack lockup</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=Tiro+Devanagari+Hindi&display=swap');</style>
+  <g transform="translate(24,40) scale(0.6)">
+    <circle cx="150" cy="150" r="128" fill="none" stroke="#1B3A6B" stroke-width="16"/>
+    <rect x="63" y="176" width="174" height="28" rx="14" fill="#1B3A6B"/>
+    <rect x="88" y="136" width="124" height="28" rx="14" fill="#1B3A6B"/>
+    <rect x="113" y="96" width="74" height="28" rx="14" fill="#C08A2E"/>
+  </g>
+  <g transform="translate(232,0)">
+  <text x="0" y="150" font-family="'Archivo Black', Archivo, Helvetica, Arial, sans-serif" font-size="72" letter-spacing="-1" fill="#1B3A6B">ASK SALE <tspan fill="#C08A2E">WALA</tspan></text>
+  <text x="0" y="192" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="19" font-weight="600" letter-spacing="4.2" fill="#141A23" fill-opacity="0.72">CROCKERY &#183; HANDLOOM &#183; HOME ESSENTIALS</text>
+  </g>
+</svg>
+</div>
+          <div class="panel panel-dark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300" role="img" aria-label="ASK SALE WALA mark — The Stack">
+  <title>ASK SALE WALA — The Stack</title>
+  <g>
+    <circle cx="150" cy="150" r="128" fill="none" stroke="#F2F4F7" stroke-width="16"/>
+    <rect x="63" y="176" width="174" height="28" rx="14" fill="#F2F4F7"/>
+    <rect x="88" y="136" width="124" height="28" rx="14" fill="#F2F4F7"/>
+    <rect x="113" y="96" width="74" height="28" rx="14" fill="#C08A2E"/>
+  </g>
+</svg>
+</div>
+        </div>
+        <div class="notes">
+          <p class="idea">Plate, bowl, cup — reduced to three stacked rules inside a ring. It reads as tableware up close and as a tidy catalogue list at thumbnail size.</p>
+          <p class="use"><span class="lbl">Where it wins</span>Strongest at 16px. The ring gives it a built-in app-icon shape, so the favicon and the shop signboard are the same drawing.</p>
+        </div>
+      </article>
+
+      <article class="concept" id="c02">
+        <div class="concept-head">
+          <span class="num">02</span>
+          <h2>Bazaar Arch</h2>
+        </div>
+        <div class="panels">
+          <div class="panel panel-light"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 260" width="1000" height="260" role="img" aria-label="ASK SALE WALA logo — Bazaar Arch">
+  <title>ASK SALE WALA — Bazaar Arch lockup</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=Tiro+Devanagari+Hindi&display=swap');</style>
+  <g transform="translate(24,40) scale(0.6)">
+    <path d="M62 256 V142 a88 88 0 0 1 176 0 V256" fill="none" stroke="#1B3A6B"
+      stroke-width="24" stroke-linecap="round"/>
+    <path d="M104 168 H196 q-4 44 -46 46 q-42 -2 -46 -46 Z" fill="#C08A2E"/>
+    <rect x="132" y="132" width="36" height="14" rx="7" fill="#C08A2E"/>
+  </g>
+  <g transform="translate(232,0)">
+  <text x="0" y="150" font-family="'Archivo Black', Archivo, Helvetica, Arial, sans-serif" font-size="72" letter-spacing="-1" fill="#1B3A6B">ASK SALE <tspan fill="#C08A2E">WALA</tspan></text>
+  <text x="0" y="192" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="19" font-weight="600" letter-spacing="4.2" fill="#141A23" fill-opacity="0.72">CROCKERY &#183; HANDLOOM &#183; HOME ESSENTIALS</text>
+  </g>
+</svg>
+</div>
+          <div class="panel panel-dark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300" role="img" aria-label="ASK SALE WALA mark — Bazaar Arch">
+  <title>ASK SALE WALA — Bazaar Arch</title>
+  <g>
+    <path d="M62 256 V142 a88 88 0 0 1 176 0 V256" fill="none" stroke="#F2F4F7"
+      stroke-width="24" stroke-linecap="round"/>
+    <path d="M104 168 H196 q-4 44 -46 46 q-42 -2 -46 -46 Z" fill="#C08A2E"/>
+    <rect x="132" y="132" width="36" height="14" rx="7" fill="#C08A2E"/>
+  </g>
+</svg>
+</div>
+        </div>
+        <div class="notes">
+          <p class="idea">The arched shopfront every Indian high street shares, with a brass bowl set in the opening. It says 'this is a shop' before anyone reads a word.</p>
+          <p class="use"><span class="lbl">Where it wins</span>Best for signage, carry bags and the storefront. The open base lets it sit on top of a shelf edge or a photo without a box.</p>
+        </div>
+      </article>
+
+      <article class="concept" id="c03">
+        <div class="concept-head">
+          <span class="num">03</span>
+          <h2>Warp &amp; Weft</h2>
+        </div>
+        <div class="panels">
+          <div class="panel panel-light"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 260" width="1000" height="260" role="img" aria-label="ASK SALE WALA logo — Warp &amp; Weft">
+  <title>ASK SALE WALA — Warp &amp; Weft lockup</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=Tiro+Devanagari+Hindi&display=swap');</style>
+  <g transform="translate(24,40) scale(0.6)">
+    <mask id="warpgap"><rect width="300" height="300" fill="#fff"/><rect x="53" y="0" width="32" height="300" fill="#000"/><rect x="107" y="0" width="32" height="300" fill="#000"/><rect x="161" y="0" width="32" height="300" fill="#000"/><rect x="215" y="0" width="32" height="300" fill="#000"/></mask>
+    <rect x="53" y="53" width="32" height="194" rx="5" fill="#1B3A6B"/>
+    <rect x="107" y="53" width="32" height="194" rx="5" fill="#1B3A6B"/>
+    <rect x="161" y="53" width="32" height="194" rx="5" fill="#1B3A6B"/>
+    <rect x="215" y="53" width="32" height="194" rx="5" fill="#1B3A6B"/>
+    <rect x="53" y="53" width="194" height="32" rx="5" fill="#C08A2E" mask="url(#warpgap)"/>
+    <rect x="53" y="53" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="161" y="53" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="53" y="107" width="194" height="32" rx="5" fill="#C08A2E" mask="url(#warpgap)"/>
+    <rect x="107" y="107" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="215" y="107" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="53" y="161" width="194" height="32" rx="5" fill="#C08A2E" mask="url(#warpgap)"/>
+    <rect x="53" y="161" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="161" y="161" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="53" y="215" width="194" height="32" rx="5" fill="#C08A2E" mask="url(#warpgap)"/>
+    <rect x="107" y="215" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="215" y="215" width="32" height="32" rx="5" fill="#C08A2E"/>
+  </g>
+  <g transform="translate(232,0)">
+  <text x="0" y="150" font-family="'Archivo Black', Archivo, Helvetica, Arial, sans-serif" font-size="72" letter-spacing="-1" fill="#1B3A6B">ASK SALE <tspan fill="#C08A2E">WALA</tspan></text>
+  <text x="0" y="192" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="19" font-weight="600" letter-spacing="4.2" fill="#141A23" fill-opacity="0.72">CROCKERY &#183; HANDLOOM &#183; HOME ESSENTIALS</text>
+  </g>
+</svg>
+</div>
+          <div class="panel panel-dark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300" role="img" aria-label="ASK SALE WALA mark — Warp &amp; Weft">
+  <title>ASK SALE WALA — Warp &amp; Weft</title>
+  <g>
+    <mask id="warpgap"><rect width="300" height="300" fill="#fff"/><rect x="53" y="0" width="32" height="300" fill="#000"/><rect x="107" y="0" width="32" height="300" fill="#000"/><rect x="161" y="0" width="32" height="300" fill="#000"/><rect x="215" y="0" width="32" height="300" fill="#000"/></mask>
+    <rect x="53" y="53" width="32" height="194" rx="5" fill="#F2F4F7"/>
+    <rect x="107" y="53" width="32" height="194" rx="5" fill="#F2F4F7"/>
+    <rect x="161" y="53" width="32" height="194" rx="5" fill="#F2F4F7"/>
+    <rect x="215" y="53" width="32" height="194" rx="5" fill="#F2F4F7"/>
+    <rect x="53" y="53" width="194" height="32" rx="5" fill="#C08A2E" mask="url(#warpgap)"/>
+    <rect x="53" y="53" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="161" y="53" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="53" y="107" width="194" height="32" rx="5" fill="#C08A2E" mask="url(#warpgap)"/>
+    <rect x="107" y="107" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="215" y="107" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="53" y="161" width="194" height="32" rx="5" fill="#C08A2E" mask="url(#warpgap)"/>
+    <rect x="53" y="161" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="161" y="161" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="53" y="215" width="194" height="32" rx="5" fill="#C08A2E" mask="url(#warpgap)"/>
+    <rect x="107" y="215" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="215" y="215" width="32" height="32" rx="5" fill="#C08A2E"/>
+  </g>
+</svg>
+</div>
+        </div>
+        <div class="notes">
+          <p class="idea">A literal plain weave: indigo warp threads running under and over a brass weft. The handloom half of the range, drawn as structure rather than as a picture of cloth.</p>
+          <p class="use"><span class="lbl">Where it wins</span>The most ownable mark here — nobody else in home essentials is using a weave grid. Tiles seamlessly, so it doubles as packaging and label pattern.</p>
+        </div>
+      </article>
+
+      <article class="concept" id="c04">
+        <div class="concept-head">
+          <span class="num">04</span>
+          <h2>Wala Seal</h2>
+        </div>
+        <div class="panels">
+          <div class="panel panel-light"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 260" width="1000" height="260" role="img" aria-label="ASK SALE WALA logo — Wala Seal">
+  <title>ASK SALE WALA — Wala Seal lockup</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=Tiro+Devanagari+Hindi&display=swap');</style>
+  <g transform="translate(24,40) scale(0.6)">
+    <circle cx="150" cy="150" r="132" fill="none" stroke="#1B3A6B" stroke-width="14"/>
+    <circle cx="150" cy="150" r="112" fill="none" stroke="#C08A2E" stroke-width="4"/>
+    <circle cx="150" cy="150" r="88"  fill="none" stroke="#1B3A6B" stroke-width="12"/>
+    <circle cx="150" cy="150" r="58"  fill="none" stroke="#1B3A6B" stroke-width="12"/>
+    <circle cx="150" cy="150" r="26"  fill="#C08A2E"/>
+  </g>
+  <g transform="translate(232,0)">
+  <text x="0" y="150" font-family="'Archivo Black', Archivo, Helvetica, Arial, sans-serif" font-size="72" letter-spacing="-1" fill="#1B3A6B">ASK SALE <tspan fill="#C08A2E">WALA</tspan></text>
+  <text x="0" y="192" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="19" font-weight="600" letter-spacing="4.2" fill="#141A23" fill-opacity="0.72">CROCKERY &#183; HANDLOOM &#183; HOME ESSENTIALS</text>
+  </g>
+</svg>
+</div>
+          <div class="panel panel-dark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300" role="img" aria-label="ASK SALE WALA mark — Wala Seal">
+  <title>ASK SALE WALA — Wala Seal</title>
+  <g>
+    <circle cx="150" cy="150" r="132" fill="none" stroke="#F2F4F7" stroke-width="14"/>
+    <circle cx="150" cy="150" r="112" fill="none" stroke="#C08A2E" stroke-width="4"/>
+    <circle cx="150" cy="150" r="88"  fill="none" stroke="#F2F4F7" stroke-width="12"/>
+    <circle cx="150" cy="150" r="58"  fill="none" stroke="#F2F4F7" stroke-width="12"/>
+    <circle cx="150" cy="150" r="26"  fill="#C08A2E"/>
+  </g>
+</svg>
+</div>
+        </div>
+        <div class="notes">
+          <p class="idea">A plate seen from directly above is already concentric rings; so is a trust seal. This mark is both at once, which is why it carries the bilingual lockup.</p>
+          <p class="use"><span class="lbl">Where it wins</span>The choice if you want to read as established rather than new. Stamps beautifully in one colour on cartons, tags and invoices.</p>
+        </div>
+      </article>
+
+      <article class="concept" id="c05">
+        <div class="concept-head">
+          <span class="num">05</span>
+          <h2>Thread to Plate</h2>
+        </div>
+        <div class="panels">
+          <div class="panel panel-light"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 260" width="1000" height="260" role="img" aria-label="ASK SALE WALA logo — Thread to Plate">
+  <title>ASK SALE WALA — Thread to Plate lockup</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=Tiro+Devanagari+Hindi&display=swap');</style>
+  <g transform="translate(24,40) scale(0.6)">
+    <path d="M180.0,150.0 L180.3,152.4 L180.4,154.9 L180.3,157.4 L180.0,159.9 L179.5,162.5 L178.7,165.0 L177.8,167.4 L176.6,169.8 L175.2,172.1 L173.7,174.4 L171.9,176.5 L169.9,178.5 L167.8,180.3 L165.5,182.0 L163.0,183.5 L160.4,184.8 L157.7,185.9 L154.8,186.8 L151.9,187.5 L148.9,187.9 L145.8,188.1 L142.7,188.0 L139.6,187.7 L136.5,187.1 L133.4,186.3 L130.3,185.2 L127.4,183.9 L124.5,182.3 L121.7,180.4 L119.1,178.3 L116.6,176.0 L114.3,173.5 L112.2,170.7 L110.3,167.8 L108.6,164.7 L107.2,161.5 L106.0,158.1 L105.1,154.6 L104.5,151.0 L104.2,147.3 L104.2,143.6 L104.4,139.9 L105.0,136.2 L105.9,132.5 L107.1,128.8 L108.6,125.2 L110.3,121.8 L112.4,118.4 L114.8,115.3 L117.4,112.3 L120.3,109.5 L123.4,106.9 L126.8,104.5 L130.3,102.5 L134.1,100.7 L138.0,99.2 L142.0,98.0 L146.2,97.1 L150.4,96.6 L154.7,96.4 L159.0,96.5 L163.4,97.0 L167.7,97.9 L172.0,99.1 L176.2,100.7 L180.2,102.6 L184.2,104.8 L187.9,107.4 L191.5,110.3 L194.8,113.5 L197.9,117.0 L200.8,120.7 L203.3,124.7 L205.5,128.9 L207.4,133.3 L209.0,137.9 L210.1,142.6 L210.9,147.4 L211.3,152.3 L211.4,157.2 L211.0,162.2 L210.2,167.1 L209.0,172.0 L207.4,176.8 L205.4,181.5 L203.1,186.1 L200.3,190.4 L197.2,194.6 L193.8,198.5 L190.0,202.2 L185.9,205.5 L181.6,208.6 L176.9,211.3 L172.1,213.6 L167.0,215.6 L161.8,217.1 L156.4,218.2 L151.0,218.9 L145.4,219.2 L139.9,219.0 L134.3,218.3 L128.8,217.2 L123.3,215.7 L118.0,213.7 L112.8,211.3 L107.7,208.4 L103.0,205.2 L98.4,201.5 L94.2,197.5 L90.2,193.1 L86.6,188.4 L83.4,183.4 L80.6,178.1 L78.2,172.6 L76.2,166.9 L74.7,161.0 L73.7,155.0 L73.1,148.8 L73.1,142.7 L73.5,136.5 L74.5,130.3 L75.9,124.2 L77.8,118.2 L80.3,112.3 L83.2,106.7 L86.5,101.2 L90.3,96.0 L94.6,91.2 L99.2,86.6 L104.2,82.4 L109.6,78.6 L115.2,75.3 L121.2,72.3 L127.4,69.9 L133.7,68.0 L140.3,66.5 L147.0,65.6 L153.8,65.3 L160.6,65.4 L167.4,66.2 L174.1,67.4 L180.8,69.3 L187.3,71.6 L193.7,74.5 L199.8,77.9 L205.6,81.8 L211.2,86.2 L216.4,91.0 L221.2,96.3 L225.6,101.9 L229.5,107.9 L233.0,114.3 L236.0,120.9 L238.4,127.8 L240.3,134.8 L241.6,142.1 L242.4,149.4 L242.5,156.8 L242.1,164.3 L241.0,171.7 L239.4,179.0 L237.1,186.2 L234.3,193.2 L230.9,200.0 L227.0,206.6 L222.5,212.8 L217.6,218.7 L212.1,224.2 L206.2,229.2 L199.9,233.8 L193.2,237.9 L186.2,241.4 L178.9,244.4 L171.4,246.8 L163.6,248.6 L155.7,249.8 L147.7,250.3 L139.7,250.2 L131.6,249.4 L123.6,248.0 L115.7,246.0 L108.0,243.3 L100.5,240.0 L93.3,236.1 L86.3,231.6 L79.7,226.5 L73.6,220.9 L67.8,214.8 L62.6,208.3 L57.8,201.3 L53.7,193.9 L50.1,186.2 L47.1,178.2 L44.8,170.0 L43.2,161.6 L42.2,153.0" fill="none" stroke="#1B3A6B"
+      stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M242.4,149.4 L242.5,156.8 L242.1,164.3 L241.0,171.7 L239.4,179.0 L237.1,186.2 L234.3,193.2 L230.9,200.0 L227.0,206.6 L222.5,212.8 L217.6,218.7 L212.1,224.2 L206.2,229.2 L199.9,233.8 L193.2,237.9 L186.2,241.4 L178.9,244.4 L171.4,246.8 L163.6,248.6 L155.7,249.8 L147.7,250.3 L139.7,250.2 L131.6,249.4 L123.6,248.0 L115.7,246.0 L108.0,243.3 L100.5,240.0 L93.3,236.1 L86.3,231.6 L79.7,226.5 L73.6,220.9 L67.8,214.8 L62.6,208.3 L57.8,201.3 L53.7,193.9 L50.1,186.2 L47.1,178.2 L44.8,170.0 L43.2,161.6 L42.2,153.0" fill="none" stroke="#C08A2E"
+      stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(232,0)">
+  <text x="0" y="150" font-family="'Archivo Black', Archivo, Helvetica, Arial, sans-serif" font-size="72" letter-spacing="-1" fill="#1B3A6B">ASK SALE <tspan fill="#C08A2E">WALA</tspan></text>
+  <text x="0" y="192" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="19" font-weight="600" letter-spacing="4.2" fill="#141A23" fill-opacity="0.72">CROCKERY &#183; HANDLOOM &#183; HOME ESSENTIALS</text>
+  </g>
+</svg>
+</div>
+          <div class="panel panel-dark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300" role="img" aria-label="ASK SALE WALA mark — Thread to Plate">
+  <title>ASK SALE WALA — Thread to Plate</title>
+  <g>
+    <path d="M180.0,150.0 L180.3,152.4 L180.4,154.9 L180.3,157.4 L180.0,159.9 L179.5,162.5 L178.7,165.0 L177.8,167.4 L176.6,169.8 L175.2,172.1 L173.7,174.4 L171.9,176.5 L169.9,178.5 L167.8,180.3 L165.5,182.0 L163.0,183.5 L160.4,184.8 L157.7,185.9 L154.8,186.8 L151.9,187.5 L148.9,187.9 L145.8,188.1 L142.7,188.0 L139.6,187.7 L136.5,187.1 L133.4,186.3 L130.3,185.2 L127.4,183.9 L124.5,182.3 L121.7,180.4 L119.1,178.3 L116.6,176.0 L114.3,173.5 L112.2,170.7 L110.3,167.8 L108.6,164.7 L107.2,161.5 L106.0,158.1 L105.1,154.6 L104.5,151.0 L104.2,147.3 L104.2,143.6 L104.4,139.9 L105.0,136.2 L105.9,132.5 L107.1,128.8 L108.6,125.2 L110.3,121.8 L112.4,118.4 L114.8,115.3 L117.4,112.3 L120.3,109.5 L123.4,106.9 L126.8,104.5 L130.3,102.5 L134.1,100.7 L138.0,99.2 L142.0,98.0 L146.2,97.1 L150.4,96.6 L154.7,96.4 L159.0,96.5 L163.4,97.0 L167.7,97.9 L172.0,99.1 L176.2,100.7 L180.2,102.6 L184.2,104.8 L187.9,107.4 L191.5,110.3 L194.8,113.5 L197.9,117.0 L200.8,120.7 L203.3,124.7 L205.5,128.9 L207.4,133.3 L209.0,137.9 L210.1,142.6 L210.9,147.4 L211.3,152.3 L211.4,157.2 L211.0,162.2 L210.2,167.1 L209.0,172.0 L207.4,176.8 L205.4,181.5 L203.1,186.1 L200.3,190.4 L197.2,194.6 L193.8,198.5 L190.0,202.2 L185.9,205.5 L181.6,208.6 L176.9,211.3 L172.1,213.6 L167.0,215.6 L161.8,217.1 L156.4,218.2 L151.0,218.9 L145.4,219.2 L139.9,219.0 L134.3,218.3 L128.8,217.2 L123.3,215.7 L118.0,213.7 L112.8,211.3 L107.7,208.4 L103.0,205.2 L98.4,201.5 L94.2,197.5 L90.2,193.1 L86.6,188.4 L83.4,183.4 L80.6,178.1 L78.2,172.6 L76.2,166.9 L74.7,161.0 L73.7,155.0 L73.1,148.8 L73.1,142.7 L73.5,136.5 L74.5,130.3 L75.9,124.2 L77.8,118.2 L80.3,112.3 L83.2,106.7 L86.5,101.2 L90.3,96.0 L94.6,91.2 L99.2,86.6 L104.2,82.4 L109.6,78.6 L115.2,75.3 L121.2,72.3 L127.4,69.9 L133.7,68.0 L140.3,66.5 L147.0,65.6 L153.8,65.3 L160.6,65.4 L167.4,66.2 L174.1,67.4 L180.8,69.3 L187.3,71.6 L193.7,74.5 L199.8,77.9 L205.6,81.8 L211.2,86.2 L216.4,91.0 L221.2,96.3 L225.6,101.9 L229.5,107.9 L233.0,114.3 L236.0,120.9 L238.4,127.8 L240.3,134.8 L241.6,142.1 L242.4,149.4 L242.5,156.8 L242.1,164.3 L241.0,171.7 L239.4,179.0 L237.1,186.2 L234.3,193.2 L230.9,200.0 L227.0,206.6 L222.5,212.8 L217.6,218.7 L212.1,224.2 L206.2,229.2 L199.9,233.8 L193.2,237.9 L186.2,241.4 L178.9,244.4 L171.4,246.8 L163.6,248.6 L155.7,249.8 L147.7,250.3 L139.7,250.2 L131.6,249.4 L123.6,248.0 L115.7,246.0 L108.0,243.3 L100.5,240.0 L93.3,236.1 L86.3,231.6 L79.7,226.5 L73.6,220.9 L67.8,214.8 L62.6,208.3 L57.8,201.3 L53.7,193.9 L50.1,186.2 L47.1,178.2 L44.8,170.0 L43.2,161.6 L42.2,153.0" fill="none" stroke="#F2F4F7"
+      stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M242.4,149.4 L242.5,156.8 L242.1,164.3 L241.0,171.7 L239.4,179.0 L237.1,186.2 L234.3,193.2 L230.9,200.0 L227.0,206.6 L222.5,212.8 L217.6,218.7 L212.1,224.2 L206.2,229.2 L199.9,233.8 L193.2,237.9 L186.2,241.4 L178.9,244.4 L171.4,246.8 L163.6,248.6 L155.7,249.8 L147.7,250.3 L139.7,250.2 L131.6,249.4 L123.6,248.0 L115.7,246.0 L108.0,243.3 L100.5,240.0 L93.3,236.1 L86.3,231.6 L79.7,226.5 L73.6,220.9 L67.8,214.8 L62.6,208.3 L57.8,201.3 L53.7,193.9 L50.1,186.2 L47.1,178.2 L44.8,170.0 L43.2,161.6 L42.2,153.0" fill="none" stroke="#C08A2E"
+      stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
+</div>
+        </div>
+        <div class="notes">
+          <p class="idea">One continuous line starts as a spun thread and closes as a plate rim — handloom and crockery in a single unbroken stroke. The riskiest mark and the most memorable.</p>
+          <p class="use"><span class="lbl">Where it wins</span>Needs a minimum size of about 24px to keep the spiral open. Pair it with the wordmark; it is not a standalone signboard.</p>
+        </div>
+      </article>
+
+    <section class="block">
+      <h3>Bilingual lockup</h3>
+      <div class="bilingual"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="1000" height="300" role="img" aria-label="ASK SALE WALA bilingual logo">
+  <title>ASK SALE WALA — Bilingual lockup</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=Tiro+Devanagari+Hindi&display=swap');</style>
+  <g transform="translate(24,60) scale(0.6)">
+    <circle cx="150" cy="150" r="132" fill="none" stroke="#1B3A6B" stroke-width="14"/>
+    <circle cx="150" cy="150" r="112" fill="none" stroke="#C08A2E" stroke-width="4"/>
+    <circle cx="150" cy="150" r="88"  fill="none" stroke="#1B3A6B" stroke-width="12"/>
+    <circle cx="150" cy="150" r="58"  fill="none" stroke="#1B3A6B" stroke-width="12"/>
+    <circle cx="150" cy="150" r="26"  fill="#C08A2E"/>
+  </g>
+  <g transform="translate(232,0)">
+    <text x="0" y="140" font-family="'Archivo Black', Archivo, Helvetica, Arial, sans-serif" font-size="70" letter-spacing="-1" fill="#1B3A6B">ASK SALE <tspan fill="#C08A2E">WALA</tspan></text>
+    <text x="2" y="208" font-family="'Tiro Devanagari Hindi', Georgia, serif" font-size="46" fill="#141A23" fill-opacity="0.8">&#2310;&#2360;&#2381;&#2325; &#2360;&#2375;&#2354; &#2357;&#2366;&#2354;&#2366;</text>
+  </g>
+</svg>
+</div>
+      <p class="use" style="margin-top:14px"><span class="lbl">Why it matters</span>&ldquo;Wala&rdquo; is already doing the work of speaking Hindi in an English wordmark. Setting the name in Devanagari underneath doubles the audience on packaging, delivery boxes and local print &mdash; and it is what the market leaders do the moment they go past metro cities. Any of the five marks can take this treatment.</p>
+    </section>
+
+    <section class="block">
+      <h3>Wordmark, standalone</h3>
+      <div class="bilingual" style="text-align:left"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="ASK SALE WALA wordmark">
+  <title>ASK SALE WALA — Wordmark</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=Tiro+Devanagari+Hindi&display=swap');</style>
+  <text x="0" y="126" font-family="'Archivo Black', Archivo, Helvetica, Arial, sans-serif" font-size="92" letter-spacing="-2" fill="#1B3A6B">ASK SALE</text>
+  <text x="0" y="176" font-family="'Archivo Black', Archivo, Helvetica, Arial, sans-serif" font-size="46" letter-spacing="20" fill="#C08A2E">WALA</text>
+  <g transform="translate(0,26)"><rect x="0" y="188" width="22" height="10" rx="5" fill="#C08A2E" fill-opacity="1"/><rect x="34" y="200" width="22" height="10" rx="5" fill="#1B3A6B" fill-opacity="0.55"/><rect x="68" y="188" width="22" height="10" rx="5" fill="#C08A2E" fill-opacity="1"/><rect x="102" y="200" width="22" height="10" rx="5" fill="#1B3A6B" fill-opacity="0.55"/><rect x="136" y="188" width="22" height="10" rx="5" fill="#C08A2E" fill-opacity="1"/><rect x="170" y="200" width="22" height="10" rx="5" fill="#1B3A6B" fill-opacity="0.55"/><rect x="204" y="188" width="22" height="10" rx="5" fill="#C08A2E" fill-opacity="1"/><rect x="238" y="200" width="22" height="10" rx="5" fill="#1B3A6B" fill-opacity="0.55"/><rect x="272" y="188" width="22" height="10" rx="5" fill="#C08A2E" fill-opacity="1"/><rect x="306" y="200" width="22" height="10" rx="5" fill="#1B3A6B" fill-opacity="0.55"/><rect x="340" y="188" width="22" height="10" rx="5" fill="#C08A2E" fill-opacity="1"/><rect x="374" y="200" width="22" height="10" rx="5" fill="#1B3A6B" fill-opacity="0.55"/><rect x="408" y="188" width="22" height="10" rx="5" fill="#C08A2E" fill-opacity="1"/><rect x="442" y="200" width="22" height="10" rx="5" fill="#1B3A6B" fill-opacity="0.55"/><rect x="476" y="188" width="22" height="10" rx="5" fill="#C08A2E" fill-opacity="1"/><rect x="510" y="200" width="22" height="10" rx="5" fill="#1B3A6B" fill-opacity="0.55"/><rect x="544" y="188" width="22" height="10" rx="5" fill="#C08A2E" fill-opacity="1"/><rect x="578" y="200" width="22" height="10" rx="5" fill="#1B3A6B" fill-opacity="0.55"/><rect x="612" y="188" width="22" height="10" rx="5" fill="#C08A2E" fill-opacity="1"/><rect x="646" y="200" width="22" height="10" rx="5" fill="#1B3A6B" fill-opacity="0.55"/></g>
+  <text x="0" y="266" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="19" font-weight="600" letter-spacing="4.2" fill="#141A23" fill-opacity="0.72">CROCKERY &#183; HANDLOOM &#183; HOME ESSENTIALS</text>
+</svg>
+</div>
+      <p class="use" style="margin-top:14px"><span class="lbl">Where it wins</span>Invoices, email signatures, marketplace seller banners and anywhere the mark would be too small to read. The woven rule under the name is lifted straight from concept 03, so the family stays tied together.</p>
+    </section>
+
+    <section class="block">
+      <h3>Palette</h3>
+      <div class="swatches">
+        <div class="sw"><i style="background:#1B3A6B"></i><div><b>Vat Indigo</b>#1B3A6B</div></div>
+        <div class="sw"><i style="background:#12294D"></i><div><b>Deep Indigo</b>#12294D</div></div>
+        <div class="sw"><i style="background:#C08A2E"></i><div><b>Brass</b>#C08A2E</div></div>
+        <div class="sw"><i style="background:#DCA93F"></i><div><b>Bright Brass</b>#DCA93F</div></div>
+        <div class="sw"><i style="background:#F2F4F7;border-bottom:1px solid var(--edge)"></i><div><b>Porcelain</b>#F2F4F7</div></div>
+        <div class="sw"><i style="background:#141A23"></i><div><b>Ink</b>#141A23</div></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>Using the marks</h3>
+      <div class="two">
+        <ul class="rules">
+          <li><b>Clear space.</b> Keep empty margin equal to the height of the letter A in the wordmark on all four sides.</li>
+          <li><b>Minimum size.</b> Marks 01&ndash;04 hold at 16px. Mark 05 needs 24px.</li>
+          <li><b>One colour.</b> Every mark is drawn to work as solid indigo on porcelain, or solid porcelain on indigo. Use that version for embossing, stamps and single-colour printing.</li>
+        </ul>
+        <ul class="rules">
+          <li><b>Never</b> add a drop shadow, gradient, outline or stretch the lockup non-proportionally.</li>
+          <li><b>Photography.</b> On product shots, place the porcelain-on-indigo version in a solid block rather than sitting the mark directly on the image.</li>
+          <li><b>Typeface.</b> Archivo Black for the name, Archivo for supporting text, Tiro Devanagari Hindi for the Hindi setting. All three are free and open licensed.</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</div>
+<footer>ASK SALE WALA &#183; Crockery, handloom and household essentials &#183; Concept round one</footer>
+</div>

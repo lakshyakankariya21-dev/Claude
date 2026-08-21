@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 260" width="1000" height="260" role="img" aria-label="ASK SALE WALA logo — Warp &amp; Weft">
+  <title>ASK SALE WALA — Warp &amp; Weft lockup</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=Tiro+Devanagari+Hindi&display=swap');</style>
+  <g transform="translate(24,40) scale(0.6)">
+    <mask id="warpgap"><rect width="300" height="300" fill="#fff"/><rect x="53" y="0" width="32" height="300" fill="#000"/><rect x="107" y="0" width="32" height="300" fill="#000"/><rect x="161" y="0" width="32" height="300" fill="#000"/><rect x="215" y="0" width="32" height="300" fill="#000"/></mask>
+    <rect x="53" y="53" width="32" height="194" rx="5" fill="#1B3A6B"/>
+    <rect x="107" y="53" width="32" height="194" rx="5" fill="#1B3A6B"/>
+    <rect x="161" y="53" width="32" height="194" rx="5" fill="#1B3A6B"/>
+    <rect x="215" y="53" width="32" height="194" rx="5" fill="#1B3A6B"/>
+    <rect x="53" y="53" width="194" height="32" rx="5" fill="#C08A2E" mask="url(#warpgap)"/>
+    <rect x="53" y="53" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="161" y="53" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="53" y="107" width="194" height="32" rx="5" fill="#C08A2E" mask="url(#warpgap)"/>
+    <rect x="107" y="107" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="215" y="107" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="53" y="161" width="194" height="32" rx="5" fill="#C08A2E" mask="url(#warpgap)"/>
+    <rect x="53" y="161" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="161" y="161" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="53" y="215" width="194" height="32" rx="5" fill="#C08A2E" mask="url(#warpgap)"/>
+    <rect x="107" y="215" width="32" height="32" rx="5" fill="#C08A2E"/>
+    <rect x="215" y="215" width="32" height="32" rx="5" fill="#C08A2E"/>
+  </g>
+  <g transform="translate(232,0)">
+  <text x="0" y="150" font-family="'Archivo Black', Archivo, Helvetica, Arial, sans-serif" font-size="72" letter-spacing="-1" fill="#1B3A6B">ASK SALE <tspan fill="#C08A2E">WALA</tspan></text>
+  <text x="0" y="192" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="19" font-weight="600" letter-spacing="4.2" fill="#141A23" fill-opacity="0.72">CROCKERY &#183; HANDLOOM &#183; HOME ESSENTIALS</text>
+  </g>
+</svg>
