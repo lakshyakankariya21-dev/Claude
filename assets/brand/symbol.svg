@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300" role="img" aria-label="ASK SALE WALA symbol">
+  <title>ASK SALE WALA symbol</title>
+  <circle cx="150" cy="150" r="124" fill="none" stroke="#C08A2E" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#C08A2E" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+</svg>

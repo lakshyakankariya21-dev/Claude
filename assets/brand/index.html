@@ -1,0 +1,414 @@
+<title>Ask Sale Wala Identity Manual</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&family=Tiro+Devanagari+Hindi&display=swap">
+<style>
+:root{
+  --ground:#EDF0F4; --surface:#FFF; --sunk:#E4E9EF; --edge:#D3DBE5;
+  --ink:#141A23; --muted:#5B6675;
+  --indigo:#1B3A6B; --indigo-d:#12294D; --brass:#A9781F; --brass-mark:#C08A2E;
+  --kraft:#B9AE9C;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0C121A; --surface:#141D29; --sunk:#0F1822; --edge:#25313E;
+  --ink:#E7ECF3; --muted:#93A1B2; --indigo:#8FB2E4; --brass:#DCA93F; --kraft:#7A7062;
+}}
+:root[data-theme="dark"]{
+  --ground:#0C121A; --surface:#141D29; --sunk:#0F1822; --edge:#25313E;
+  --ink:#E7ECF3; --muted:#93A1B2; --indigo:#8FB2E4; --brass:#DCA93F; --kraft:#7A7062;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:"Source Serif 4",Georgia,serif;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 30px 110px}
+.wm{font-family:"Archivo Black",Archivo,sans-serif;letter-spacing:-1px}
+.dsc{font-family:Archivo,sans-serif;font-weight:600;letter-spacing:4.4px}
+header{padding:80px 0 46px}
+.kicker{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--brass);margin:0 0 20px}
+h1{font-family:"Archivo Black",Archivo,sans-serif;font-weight:400;
+  font-size:clamp(2.3rem,5.6vw,4.1rem);line-height:1;letter-spacing:-.035em;margin:0 0 22px;max-width:14ch}
+h1 em{font-style:normal;color:var(--indigo)}
+.lede{margin:0;max-width:64ch;font-size:1.18rem;color:var(--muted)}
+section{border-top:1px solid var(--edge);padding:52px 0 8px;
+  display:grid;grid-template-columns:150px 1fr;gap:48px;align-items:start}
+.snum{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--brass);position:sticky;top:28px}
+.snum b{display:block;font-family:Archivo,sans-serif;font-weight:700;font-size:14px;
+  letter-spacing:0;text-transform:none;color:var(--ink);margin-top:8px;line-height:1.35}
+.body>p:first-child{margin-top:0}
+.body p{max-width:62ch}
+.hero-sym{background:var(--surface);border:1px solid var(--edge);border-radius:3px;
+  display:grid;grid-template-columns:1fr 1fr;min-height:340px}
+.hero-sym>div{display:flex;align-items:center;justify-content:center;padding:44px}
+.hero-sym>div+div{background:var(--indigo-d)}
+.hero-sym svg{width:190px;height:auto}
+.meaning{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:26px;
+  border:1px solid var(--edge);border-radius:3px;background:var(--surface)}
+.meaning div{padding:22px 22px 24px;border-right:1px solid var(--edge)}
+.meaning div:last-child{border-right:none}
+.meaning h4{font-family:Archivo,sans-serif;font-size:13px;font-weight:700;letter-spacing:.02em;margin:0 0 8px}
+.meaning p{margin:0;font-size:.95rem;color:var(--muted)}
+.tag{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--brass);display:block;margin-bottom:9px}
+.sizes{display:flex;align-items:flex-end;gap:34px;flex-wrap:wrap;background:var(--surface);
+  border:1px solid var(--edge);border-radius:3px;padding:30px 28px}
+.mini{text-align:center}
+.minibox{display:flex;align-items:flex-end;justify-content:center;height:100px}
+.mini span{display:block;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);margin-top:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.frame{background:var(--surface);border:1px solid var(--edge);border-radius:3px;padding:30px}
+.frame .lk{width:100%;height:auto;display:block}
+.frame.dark{background:var(--indigo-d);border-color:var(--indigo-d)}
+.swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sw{border:1px solid var(--edge);border-radius:3px;overflow:hidden;background:var(--surface)}
+.sw i{display:block;height:88px}
+.sw div{padding:12px 14px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted)}
+.sw b{display:block;font-family:Archivo,sans-serif;font-size:12.5px;color:var(--ink);margin-bottom:4px;letter-spacing:.01em}
+.specimen{background:var(--surface);border:1px solid var(--edge);border-radius:3px;padding:32px}
+.specimen .big{font-family:"Archivo Black",Archivo,sans-serif;font-size:clamp(2rem,5vw,3.2rem);
+  letter-spacing:-.03em;line-height:1.05;margin:0 0 6px;color:var(--indigo)}
+.specimen .sub{font-family:Archivo,sans-serif;font-weight:600;letter-spacing:.2em;font-size:13px;
+  color:var(--muted);text-transform:uppercase;margin:0 0 26px}
+.specimen .hi{font-family:"Tiro Devanagari Hindi",Georgia,serif;font-size:2rem;margin:0 0 6px}
+.typerow{display:grid;grid-template-columns:130px 1fr;gap:18px;padding:13px 0;border-top:1px solid var(--edge);
+  font-size:.93rem;color:var(--muted)}
+.typerow b{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--brass);font-weight:400}
+.apps{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.app{border:1px solid var(--edge);border-radius:3px;overflow:hidden;background:var(--surface)}
+.app .cap{padding:12px 16px;border-top:1px solid var(--edge);font-family:"IBM Plex Mono",monospace;
+  font-size:11px;letter-spacing:.08em;color:var(--muted);background:var(--surface)}
+.stage{display:flex;align-items:center;justify-content:center;padding:30px;min-height:220px}
+.wide{grid-column:1/-1}
+.signboard{background:var(--indigo-d);width:100%;padding:30px 40px;border:3px solid #DCA93F;
+  border-radius:4px;display:flex;align-items:center;justify-content:center}
+.signboard svg{width:min(100%,300px);height:auto}
+.bag{width:212px;background:var(--surface);border:1px solid var(--edge);border-radius:2px;
+  padding:26px 18px 0;position:relative;box-shadow:0 14px 30px -22px rgba(20,26,35,.6)}
+.bag:before{content:"";position:absolute;top:-16px;left:50%;transform:translateX(-50%);
+  width:82px;height:32px;border:3px solid var(--muted);border-bottom:none;border-radius:42px 42px 0 0;opacity:.5}
+.bag svg.lk{width:100%;height:auto}
+.bag .band{width:calc(100% + 36px);margin:20px -18px 0;height:auto;display:block}
+.tape{width:100%;background:var(--indigo-d);padding:0;overflow:hidden;position:relative;height:74px;
+  display:flex;align-items:center;gap:26px;padding-left:20px}
+.tape .unit{display:flex;align-items:center;gap:11px;flex:none}
+.tape .unit svg{width:36px;height:36px}
+.tape .unit span{font-family:"Archivo Black",Archivo,sans-serif;font-size:15px;letter-spacing:.02em;color:#F2F4F7;white-space:nowrap}
+.tape .unit span i{font-style:normal;color:#DCA93F}
+.tag-card{width:150px;background:var(--surface);border:1px solid var(--edge);border-radius:3px;
+  padding:22px 16px 18px;text-align:center;position:relative;box-shadow:0 14px 30px -22px rgba(20,26,35,.6)}
+.tag-card:before{content:"";position:absolute;top:11px;left:50%;transform:translateX(-50%);
+  width:13px;height:13px;border-radius:50%;border:2px solid var(--edge)}
+.tag-card svg{width:56px;height:56px;margin-top:16px}
+.tag-card .nm{font-family:"Archivo Black",Archivo,sans-serif;font-size:14px;color:var(--indigo);margin:12px 0 3px}
+.tag-card .nm i{font-style:normal;color:var(--brass)}
+.tag-card .mt{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.09em;color:var(--muted)}
+.sheet{width:100%;background:var(--surface);border:1px solid var(--edge);padding:26px 28px}
+.sheet .top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;
+  padding-bottom:18px;border-bottom:2px solid var(--indigo)}
+.sheet .top svg{width:200px;height:auto}
+.sheet .meta{font-family:"IBM Plex Mono",monospace;font-size:10px;line-height:1.9;color:var(--muted);text-align:right}
+.sheet .lines{margin-top:18px;display:flex;flex-direction:column;gap:9px}
+.sheet .lines i{display:block;height:7px;border-radius:4px;background:var(--sunk)}
+.avatars{display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center}
+.av{width:74px;height:74px;border-radius:50%;background:var(--indigo-d);display:flex;
+  align-items:center;justify-content:center}
+.av.sq{border-radius:18px}
+.av.lt{background:var(--surface);border:1px solid var(--edge)}
+.av svg{width:58px;height:58px}
+.stamp{width:100%;background:var(--kraft);padding:34px;display:flex;align-items:center;gap:22px}
+.stamp svg{width:78px;height:78px;flex:none}
+.stamp .txt{font-family:"Archivo Black",Archivo,sans-serif;font-size:22px;color:#12294D;line-height:1.15}
+.stamp .txt small{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;white-space:nowrap;
+  font-weight:400;color:#12294D;opacity:.72;margin-top:7px}
+.dd{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+.dd ul{margin:0;padding-left:1.15em;color:var(--muted)}
+.dd li{margin-bottom:10px}
+.dd b{color:var(--ink);font-weight:600}
+.ddh{font-family:Archivo,sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;margin:0 0 14px;padding-bottom:9px;border-bottom:1px solid var(--edge)}
+.ok{color:#1F7A55} .no{color:#B23A2B}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ok{color:#4FBF8B} :root:not([data-theme="light"]) .no{color:#E8806E}}
+:root[data-theme="dark"] .ok{color:#4FBF8B} :root[data-theme="dark"] .no{color:#E8806E}
+footer{border-top:1px solid var(--edge);margin-top:60px;padding-top:24px;color:var(--muted);
+  font-family:Archivo,sans-serif;font-size:12.5px;letter-spacing:.04em}
+@media (max-width:880px){
+  section{grid-template-columns:1fr;gap:20px} .snum{position:static}
+  .hero-sym,.meaning,.grid2,.apps,.dd,.swatches{grid-template-columns:1fr}
+  .meaning div{border-right:none;border-bottom:1px solid var(--edge)}
+}
+</style>
+
+<div class="wrap">
+<header>
+  <p class="kicker">Brand identity manual &#183; Version 1</p>
+  <h1>Ask Sale <em>Wala</em></h1>
+  <p class="lede">One symbol, built from the three things you actually sell, and the system that carries it onto a signboard, a carry bag, a delivery carton and an invoice. Everything here is vector, prints in a single colour, and holds together whether it is 20 pixels wide or three feet across a shopfront.</p>
+</header>
+
+<section>
+  <div class="snum">01<b>The symbol</b></div>
+  <div class="body">
+    <p>Three plates seen edge-on, stacked widest-first, held inside a brass rim. It is deliberately the simplest true thing about the shop: goods stacked and ready to be carried home. Nothing to explain, nothing to decode &mdash; which is exactly what lets it work on a fascia board at thirty feet and a marketplace avatar at thirty pixels.</p>
+    <div class="hero-sym">
+      <div><svg viewBox="0 0 300 300" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#C08A2E" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#C08A2E" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/></svg></div>
+      <div><svg viewBox="0 0 300 300" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#DCA93F" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#DCA93F" stroke="#DCA93F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/></svg></div>
+    </div>
+    <div class="meaning">
+      <div><span class="tag">The rim</span><h4>Crockery</h4><p>The gold line around good dinnerware. It closes the mark into an emblem &mdash; and an emblem reads as a business that intends to still be here in ten years, which is the single most valuable thing a new shop can borrow.</p></div>
+      <div><span class="tag">The stack</span><h4>Handloom</h4><p>A stack of plates and a stack of folded cloth cut the same silhouette. One drawing covers both halves of the range honestly, without shrinking either into a decorative motif.</p></div>
+      <div><span class="tag">The brass plate</span><h4>The promise</h4><p>The top of the stack is the piece that gets handed across the counter. Brass marks it, and it is the only warm note anywhere in the system &mdash; which is what makes it register.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="snum">02<b>Scale &amp; clear space</b></div>
+  <div class="body">
+    <p>The symbol is built on a fixed grid: the rim sets the diameter, and the three plates sit at a constant interval with a constant taper. The gaps between plates are open ground, not white shapes, so the mark holds on kraft board, on a photograph and in a single-colour stamp. Keep clear space on all four sides equal to one quarter of the symbol&rsquo;s diameter.</p>
+    <div class="sizes"><div class="mini"><div class="minibox"><svg viewBox="0 0 300 300" width="96" height="96" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#C08A2E" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#C08A2E" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/></svg></div><span>96px</span></div><div class="mini"><div class="minibox"><svg viewBox="0 0 300 300" width="64" height="64" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#C08A2E" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#C08A2E" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/></svg></div><span>64px</span></div><div class="mini"><div class="minibox"><svg viewBox="0 0 300 300" width="40" height="40" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#C08A2E" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#C08A2E" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/></svg></div><span>40px</span></div><div class="mini"><div class="minibox"><svg viewBox="0 0 300 300" width="28" height="28" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#C08A2E" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#C08A2E" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/></svg></div><span>28px</span></div><div class="mini"><div class="minibox"><svg viewBox="0 0 300 300" width="20" height="20" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#C08A2E" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#C08A2E" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/></svg></div><span>20px</span></div></div>
+    <p style="margin-top:18px;color:var(--muted);font-size:.95rem"><span class="tag">Minimum size</span>24&#8239;px on screen, 10&#8239;mm in print. Below that the rim starts to close up &mdash; drop it and use the three plates alone, or switch to the wordmark.</p>
+  </div>
+</section>
+
+<section>
+  <div class="snum">03<b>Lockups</b></div>
+  <div class="body">
+    <p>Four approved arrangements. Nothing else &mdash; no re-spacing, no re-colouring, no extra taglines wedged in beside the name.</p>
+    <div class="grid2">
+      <div class="frame"><svg viewBox="0 0 1000 260" class="lk" aria-label="ASK SALE WALA">
+  <g transform="translate(20,40) scale(0.6)"><circle cx="150" cy="150" r="124" fill="none" stroke="#C08A2E" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#C08A2E" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/></g>
+  <text x="228" y="140" class="wm" font-size="72" fill="#1B3A6B">ASK SALE <tspan fill="#C08A2E">WALA</tspan></text><text x="231" y="180" class="dsc" font-size="19" fill="#141A23" fill-opacity=".7">CROCKERY &#183; HANDLOOM &#183; HOME ESSENTIALS</text>
+</svg><span class="tag" style="margin-top:16px">Primary &#183; horizontal</span></div>
+      <div class="frame dark"><svg viewBox="0 0 1000 260" class="lk" aria-label="ASK SALE WALA">
+  <g transform="translate(20,40) scale(0.6)"><circle cx="150" cy="150" r="124" fill="none" stroke="#DCA93F" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#DCA93F" stroke="#DCA93F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/></g>
+  <text x="228" y="140" class="wm" font-size="72" fill="#F2F4F7">ASK SALE <tspan fill="#DCA93F">WALA</tspan></text><text x="231" y="180" class="dsc" font-size="19" fill="#F2F4F7" fill-opacity=".78">CROCKERY &#183; HANDLOOM &#183; HOME ESSENTIALS</text>
+</svg><span class="tag" style="margin-top:16px;color:#DCA93F">Reversed</span></div>
+      <div class="frame"><svg viewBox="0 0 620 470" class="lk" aria-label="ASK SALE WALA">
+  <g transform="translate(160,4)"><circle cx="150" cy="150" r="124" fill="none" stroke="#C08A2E" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#C08A2E" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/></g>
+  <text x="310" y="392" text-anchor="middle" class="wm" font-size="64" fill="#1B3A6B">ASK SALE <tspan fill="#C08A2E">WALA</tspan></text>
+  <text x="310" y="434" text-anchor="middle" class="dsc" font-size="18" fill="#141A23" fill-opacity=".7">CROCKERY &#183; HANDLOOM &#183; HOME ESSENTIALS</text>
+</svg><span class="tag" style="margin-top:8px">Stacked &#183; signage &amp; avatars</span></div>
+      <div class="frame">
+        <svg viewBox="0 0 1000 300" class="lk" aria-label="ASK SALE WALA bilingual">
+          <g transform="translate(20,58) scale(0.6)"><circle cx="150" cy="150" r="124" fill="none" stroke="#C08A2E" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#C08A2E" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/></g>
+          <text x="228" y="142" class="wm" font-size="70" fill="#1B3A6B">ASK SALE <tspan fill="#C08A2E">WALA</tspan></text>
+          <text x="230" y="212" font-family="'Tiro Devanagari Hindi',Georgia,serif" font-size="46" fill="#141A23" fill-opacity=".8">&#2310;&#2360;&#2381;&#2325; &#2360;&#2375;&#2354; &#2357;&#2366;&#2354;&#2366;</text>
+        </svg>
+        <span class="tag" style="margin-top:8px">Bilingual &#183; packaging &amp; local print</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="snum">04<b>Colour</b></div>
+  <div class="body">
+    <p>Vat indigo is the dye of Indian handloom; brass is the metal of the Indian kitchen. The pairing belongs to what you sell, and it deliberately avoids the terracotta-and-cream that most of this category is already wearing &mdash; on a crowded marketplace listing page, that difference is the whole point.</p>
+    <div class="swatches">
+      <div class="sw"><i style="background:#1B3A6B"></i><div><b>Vat Indigo &#183; primary</b>#1B3A6B &#183; C88 M70 Y32 K16</div></div>
+      <div class="sw"><i style="background:#12294D"></i><div><b>Deep Indigo &#183; grounds</b>#12294D &#183; C93 M78 Y40 K33</div></div>
+      <div class="sw"><i style="background:#C08A2E"></i><div><b>Brass &#183; accent only</b>#C08A2E &#183; C22 M46 Y96 K3</div></div>
+      <div class="sw"><i style="background:#DCA93F"></i><div><b>Bright Brass &#183; on dark</b>#DCA93F</div></div>
+      <div class="sw"><i style="background:#F2F4F7;border-bottom:1px solid var(--edge)"></i><div><b>Porcelain &#183; ground</b>#F2F4F7</div></div>
+      <div class="sw"><i style="background:#141A23"></i><div><b>Ink &#183; body copy</b>#141A23</div></div>
+    </div>
+    <p style="margin-top:16px;color:var(--muted);font-size:.95rem">Indigo carries roughly 70% of any surface, porcelain the rest. Brass never exceeds about 10% &mdash; a rim, a rule, one word. The moment brass covers a panel it stops reading as metal and starts reading as a discount sticker.</p>
+  </div>
+</section>
+
+<section>
+  <div class="snum">05<b>Typography</b></div>
+  <div class="body">
+    <div class="specimen">
+      <p class="big">ASK SALE WALA</p>
+      <p class="sub">Archivo Black &#183; the name, headlines, signage</p>
+      <p class="hi">&#2310;&#2360;&#2381;&#2325; &#2360;&#2375;&#2354; &#2357;&#2366;&#2354;&#2366;</p>
+      <p class="sub" style="margin-bottom:20px">Tiro Devanagari Hindi &#183; the Hindi setting</p>
+      <div class="typerow"><b>Display</b><span>Archivo Black &mdash; the name and nothing longer than a headline.</span></div>
+      <div class="typerow"><b>Text</b><span>Archivo 500&#8202;/&#8202;600 &mdash; product names, labels, buttons, price lists.</span></div>
+      <div class="typerow"><b>Data</b><span>IBM Plex Mono &mdash; SKUs, batch numbers, invoice fields, dimensions.</span></div>
+      <div class="typerow"><b>Licence</b><span>All three are free for commercial use, including print and signage. No licence to buy, ever.</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="snum">06<b>The weave</b></div>
+  <div class="body">
+    <p>The emblem says what you sell; the weave says how it is made. A plain weave &mdash; warp passing under and over weft, the one move that turns thread into cloth &mdash; tiles seamlessly across packaging, bag gussets, tissue paper and shelf edging. This is where the handloom side of the business speaks, and it means a customer can recognise your parcel from across the room without reading a word on it.</p>
+    <div class="app"><div class="stage" style="padding:0">
+      <svg viewBox="0 0 960 200" preserveAspectRatio="xMidYMid slice" style="width:100%;height:200px;display:block" aria-hidden="true">
+        <defs><pattern id="pbig" width="120" height="120" patternUnits="userSpaceOnUse"><defs><mask id="tw-pbig">
+      <rect width="120" height="120" fill="#fff"/>
+      <rect x="67" y="7" width="26" height="26" rx="13" fill="#000"/>
+      <rect x="7" y="67" width="26" height="26" rx="13" fill="#000"/>
+    </mask></defs>
+    <rect width="120" height="120" fill="#F2F4F7"/>
+    <g fill="#C08A2E" fill-opacity=".8">
+      <rect x="-10" y="7" width="140" height="26"/>
+      <rect x="-10" y="67" width="140" height="26"/>
+      <g mask="url(#tw-pbig)">
+        <rect x="7" y="-10" width="26" height="140"/>
+        <rect x="67" y="-10" width="26" height="140"/>
+      </g>
+    </g></pattern></defs>
+        <rect width="960" height="200" fill="url(#pbig)"/>
+      </svg></div>
+      <div class="cap">Weave pattern &#183; brass on porcelain &#183; 120&#8239;mm repeat</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="snum">07<b>In use</b></div>
+  <div class="body">
+    <p>The identity is only worth what it does on the street and inside the parcel. These are the eight places it has to work.</p>
+    <div class="apps">
+      <div class="app wide"><div class="stage" style="background:var(--sunk)">
+        <div class="signboard"><svg viewBox="0 0 620 470" class="lk" aria-label="ASK SALE WALA">
+  <g transform="translate(160,4)"><circle cx="150" cy="150" r="124" fill="none" stroke="#DCA93F" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#DCA93F" stroke="#DCA93F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/></g>
+  <text x="310" y="392" text-anchor="middle" class="wm" font-size="64" fill="#F2F4F7">ASK SALE <tspan fill="#DCA93F">WALA</tspan></text>
+  <text x="310" y="434" text-anchor="middle" class="dsc" font-size="18" fill="#F2F4F7" fill-opacity=".8">CROCKERY &#183; HANDLOOM &#183; HOME ESSENTIALS</text>
+</svg></div>
+      </div><div class="cap">Shop fascia &#183; reversed stacked lockup, brass keyline</div></div>
+
+      <div class="app"><div class="stage" style="background:var(--sunk)">
+        <div class="bag"><svg viewBox="0 0 1000 260" class="lk" aria-label="ASK SALE WALA">
+  <g transform="translate(20,40) scale(0.6)"><circle cx="150" cy="150" r="124" fill="none" stroke="#C08A2E" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#C08A2E" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/></g>
+  <text x="228" y="140" class="wm" font-size="72" fill="#1B3A6B">ASK SALE <tspan fill="#C08A2E">WALA</tspan></text>
+</svg><svg viewBox="0 0 480 120" class="band" aria-hidden="true"><defs><pattern id="pat-bgp" width="120" height="120" patternUnits="userSpaceOnUse"><defs><mask id="tw-bgp">
+      <rect width="120" height="120" fill="#fff"/>
+      <rect x="67" y="7" width="26" height="26" rx="13" fill="#000"/>
+      <rect x="7" y="67" width="26" height="26" rx="13" fill="#000"/>
+    </mask></defs>
+    <rect width="120" height="120" fill="#F2F4F7"/>
+    <g fill="#C08A2E" fill-opacity=".85">
+      <rect x="-10" y="7" width="140" height="26"/>
+      <rect x="-10" y="67" width="140" height="26"/>
+      <g mask="url(#tw-bgp)">
+        <rect x="7" y="-10" width="26" height="140"/>
+        <rect x="67" y="-10" width="26" height="140"/>
+      </g>
+    </g></pattern></defs><rect width="480" height="120" fill="url(#pat-bgp)"/></svg></div>
+      </div><div class="cap">Carry bag &#183; lockup over weave gusset</div></div>
+
+      <div class="app"><div class="stage" style="padding:0;background:var(--sunk)">
+        <div class="tape"><div class="unit"><svg viewBox="0 0 300 300" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#DCA93F" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#DCA93F" stroke="#DCA93F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/></svg><span>ASK SALE <i>WALA</i></span></div><div class="unit"><svg viewBox="0 0 300 300" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#DCA93F" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#DCA93F" stroke="#DCA93F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/></svg><span>ASK SALE <i>WALA</i></span></div><div class="unit"><svg viewBox="0 0 300 300" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#DCA93F" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#DCA93F" stroke="#DCA93F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/></svg><span>ASK SALE <i>WALA</i></span></div><div class="unit"><svg viewBox="0 0 300 300" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#DCA93F" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#DCA93F" stroke="#DCA93F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/></svg><span>ASK SALE <i>WALA</i></span></div></div>
+      </div><div class="cap">Carton tape &#183; repeating reversed unit</div></div>
+
+      <div class="app"><div class="stage" style="background:var(--sunk)">
+        <div class="tag-card"><svg viewBox="0 0 300 300" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#C08A2E" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#C08A2E" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/></svg><p class="nm">ASK SALE <i>WALA</i></p><p class="mt">HANDLOOM &#183; COTTON</p></div>
+      </div><div class="cap">Hang tag &#183; textiles</div></div>
+
+      <div class="app"><div class="stage" style="background:var(--sunk)">
+        <div class="stamp"><svg viewBox="0 0 300 300" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#12294D" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#12294D" stroke="#12294D" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#12294D" stroke="#12294D" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#12294D" stroke="#12294D" stroke-width="3" stroke-linejoin="round"/></svg><div class="txt">ASK SALE WALA<small>PACKED WITH CARE</small></div></div>
+      </div><div class="cap">Carton stamp &#183; one colour on kraft</div></div>
+
+      <div class="app"><div class="stage" style="background:var(--sunk)">
+        <div class="sheet"><div class="top"><svg viewBox="0 0 1000 260" class="lk" aria-label="ASK SALE WALA">
+  <g transform="translate(20,40) scale(0.6)"><circle cx="150" cy="150" r="124" fill="none" stroke="#C08A2E" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#C08A2E" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/></g>
+  <text x="228" y="140" class="wm" font-size="72" fill="#1B3A6B">ASK SALE <tspan fill="#C08A2E">WALA</tspan></text>
+</svg><div class="meta">INVOICE&#8194;&#8212;<br>GSTIN&#8194;&#8212;<br>DATE&#8194;&#8212;</div></div>
+          <div class="lines"><i style="width:82%"></i><i style="width:66%"></i><i style="width:74%"></i><i style="width:41%"></i></div></div>
+      </div><div class="cap">Invoice &amp; letterhead</div></div>
+
+      <div class="app"><div class="stage" style="background:var(--sunk)">
+        <div class="avatars"><div class="av"><svg viewBox="0 0 300 300" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#DCA93F" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#DCA93F" stroke="#DCA93F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/></svg></div><div class="av sq"><svg viewBox="0 0 300 300" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#DCA93F" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#DCA93F" stroke="#DCA93F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#F2F4F7" stroke="#F2F4F7" stroke-width="3" stroke-linejoin="round"/></svg></div><div class="av lt"><svg viewBox="0 0 300 300" class="" aria-hidden="true"><circle cx="150" cy="150" r="124" fill="none" stroke="#C08A2E" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#C08A2E" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/></svg></div></div>
+      </div><div class="cap">App icon, marketplace seller avatar, favicon</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="snum">08<b>Rules</b></div>
+  <div class="body">
+    <div class="dd">
+      <div><p class="ddh ok">Always</p><ul>
+        <li><b>Use the supplied files.</b> The symbol is drawn on a fixed grid; redrawing it by eye breaks the taper between plates.</li>
+        <li><b>Give it room.</b> A quarter of its own diameter as clear space, minimum, on every side.</li>
+        <li><b>Reverse it on dark.</b> Porcelain plates, bright brass rim and crown &mdash; never indigo on a dark ground.</li>
+        <li><b>Go one-colour when the process demands it</b> &mdash; embossing, stamps, single-plate cartons, embroidery.</li>
+      </ul></div>
+      <div><p class="ddh no">Never</p><ul>
+        <li><b>No effects.</b> No gradient, bevel, glow, drop shadow or outline on the symbol.</li>
+        <li><b>No re-colouring</b> into festival palettes, and no closing the gaps between the plates.</li>
+        <li><b>No stretching.</b> Scale the lockup proportionally or not at all.</li>
+        <li><b>Not straight onto a photo.</b> Place it in a solid indigo or porcelain block first.</li>
+        <li><b>No brass panels.</b> Accent only &mdash; it is a rim, not a background.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<footer>ASK SALE WALA &#183; Crockery, handloom &amp; household essentials &#183; Identity manual v1 &#183; All marks supplied as SVG</footer>
+</div>

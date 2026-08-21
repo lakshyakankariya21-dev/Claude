@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="ASK SALE WALA weave pattern tile">
+  <title>Weave pattern tile</title>
+  <defs><mask id="tw-pt">
+      <rect width="120" height="120" fill="#fff"/>
+      <rect x="67" y="7" width="26" height="26" rx="13" fill="#000"/>
+      <rect x="7" y="67" width="26" height="26" rx="13" fill="#000"/>
+    </mask></defs>
+    <rect width="120" height="120" fill="#F2F4F7"/>
+    <g fill="#C08A2E" fill-opacity="0.85">
+      <rect x="-10" y="7" width="140" height="26"/>
+      <rect x="-10" y="67" width="140" height="26"/>
+      <g mask="url(#tw-pt)">
+        <rect x="7" y="-10" width="26" height="140"/>
+        <rect x="67" y="-10" width="26" height="140"/>
+      </g>
+    </g>
+</svg>

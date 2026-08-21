@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 500" width="620" height="500" role="img" aria-label="ASK SALE WALA logo, stacked">
+  <title>ASK SALE WALA &#8212; stacked lockup</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=Tiro+Devanagari+Hindi&display=swap');</style>
+  <g transform="translate(160,10) scale(1)"><circle cx="150" cy="150" r="124" fill="none" stroke="#C08A2E" stroke-width="8"/>
+  <path d="M104,108 Q150,80 196,108 Q150,136 104,108 Z" fill="#C08A2E" stroke="#C08A2E" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M78,150 Q150,122 222,150 Q150,178 78,150 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M52,192 Q150,164 248,192 Q150,220 52,192 Z" fill="#1B3A6B" stroke="#1B3A6B" stroke-width="3" stroke-linejoin="round"/></g>
+  <text x="310" y="400" text-anchor="middle" font-family="'Archivo Black', Archivo, Helvetica, Arial, sans-serif" font-size="66" letter-spacing="-1" fill="#1B3A6B">ASK SALE <tspan fill="#C08A2E">WALA</tspan></text>
+  <text x="310" y="442" text-anchor="middle" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="18" font-weight="600" letter-spacing="4.4" fill="#141A23" fill-opacity="0.7">CROCKERY &#183; HANDLOOM &#183; HOME ESSENTIALS</text>
+</svg>
